@@ -1,7 +1,6 @@
 import 'package:e_commerce_admin/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +25,8 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
       getPages: [
-        GetPage(name: '/products', page: ()=> const ProductsScreen())
-      ]
-    );
+          GetPage(name: '/products', page: () => ProductsScreen()),
+          GetPage(name: '/products/new', page: () => NewProductScreen()),
+        ]);
   }
 }
