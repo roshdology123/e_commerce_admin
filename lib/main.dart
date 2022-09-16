@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
       title: 'eCommerce Admin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        sliderTheme: SliderThemeData(
+          showValueIndicator: ShowValueIndicator.always,
+          overlayShape: SliderComponentShape.noOverlay,
+        )
       ),
       home: const HomeScreen(),
       getPages: [
