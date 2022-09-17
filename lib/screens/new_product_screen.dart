@@ -1,4 +1,5 @@
 import 'package:e_commerce_admin/core/constants.dart';
+import 'package:e_commerce_admin/services/storage_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,7 @@ class NewProductScreen extends StatelessWidget {
   NewProductScreen({Key? key}) : super(key: key);
 
   final ProductController productController = Get.find();
+  StorageService storageService = StorageService();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,18 @@ class NewProductScreen extends StatelessWidget {
                                   const SnackBar(
                                       content: Text('No Image Was Selected')));
                             }
-                            if (image != null) {}
+                            if (image != null) {
+                              await storageService.uploadImage(image);
+
+                              // var imageUrl = await storageService
+                              //     .getDownloadURL(image.name);
+                              // productController.newProduct.update(
+                              //     'imageUrl', (_) => imageUrl,
+                              //     ifAbsent: () => imageUrl);
+                              // if (kDebugMode) {
+                              //   print(productController.newProduct['imageUrl']);
+                              // }
+                            }
                           },
                           icon: const Icon(
                             Icons.add_circle,
@@ -83,26 +96,14 @@ class NewProductScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                _buildSlider(
-                  context,
+                _buildTextFormField(
                   'Price',
                   'price',
                   productController,
-                  productController.price,
+                  FilteringTextInputFormatter.digitsOnly,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buildSlider(
-                  context,
-                  'Quantity',
-                  'quantity',
-                  productController,
-                  productController.quantity,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
+                _buildTextFormField('Quantity', 'quantity', productController,
+                    FilteringTextInputFormatter.singleLineFormatter),
                 _buildCheckbox(context, 'Recommended', 'isRecommended',
                     productController, productController.isRecommended),
                 _buildCheckbox(context, 'Popular', 'isPopular',

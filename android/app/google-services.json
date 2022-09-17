@@ -1,41 +1,70 @@
 {
   "project_info": {
-    "project_number": "593735909341",
-    "project_id": "ecommerce-backend-f3da5",
-    "storage_bucket": "ecommerce-backend-f3da5.appspot.com"
+    "project_number": "727430997583",
+    "project_id": "justified-e-commerce",
+    "storage_bucket": "justified-e-commerce.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:593735909341:android:07b1107ed763c2be418034",
+        "mobilesdk_app_id": "1:727430997583:android:9c4b2dcf7d28894234ec3a",
         "android_client_info": {
           "package_name": "com.example.e_commerce_admin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "593735909341-94t53j61vd6lc5mbp5r7bab1i19od6i7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.e_commerce_admin",
-            "certificate_hash": "ccdcdea7478ebdb12cd6807d2ea328052c0b6cd5"
-          }
-        },
-        {
-          "client_id": "593735909341-ibvgqr34lmmjgm0pfh00ol1628548prn.apps.googleusercontent.com",
+          "client_id": "727430997583-c25q3mfftpvihvdv2256nt7560v5lcts.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSvQOIx4exCqMLDi6Sj7weX6HZ6CMnQ6Y"
+          "current_key": "AIzaSyBSpJZMbW2ZtvKRDU-dM9-2mnBz9pOhI9Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "593735909341-ibvgqr34lmmjgm0pfh00ol1628548prn.apps.googleusercontent.com",
+              "client_id": "727430997583-c25q3mfftpvihvdv2256nt7560v5lcts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727430997583:android:64a00a60a464fa7934ec3a",
+        "android_client_info": {
+          "package_name": "com.example.justifiedecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727430997583-9qbjqpgbe3jfi97d5hlvo5vuj669v3ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.justifiedecommerce",
+            "certificate_hash": "ccdcdea7478ebdb12cd6807d2ea328052c0b6cd5"
+          }
+        },
+        {
+          "client_id": "727430997583-c25q3mfftpvihvdv2256nt7560v5lcts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSpJZMbW2ZtvKRDU-dM9-2mnBz9pOhI9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727430997583-c25q3mfftpvihvdv2256nt7560v5lcts.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
