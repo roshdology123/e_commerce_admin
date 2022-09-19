@@ -75,6 +75,10 @@ class ProductCard extends StatelessWidget {
                                 productController.updateProductPrice(
                                     index, product, value);
                               },
+                              onChangeEnd: (value) {
+                                productController.saveNewProductPrice(
+                                    product, 'price', value);
+                              },
                             ),
                           ),
                           const SizedBox(
@@ -113,6 +117,11 @@ class ProductCard extends StatelessWidget {
                                   product,
                                   value.toInt(),
                                 );
+                                onChangeEnd:
+                                (value) {
+                                  productController.saveNewProductQuantity(
+                                      product, 'quantity', value);
+                                };
                               },
                             ),
                           ),

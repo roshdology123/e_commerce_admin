@@ -1,4 +1,6 @@
 import 'package:e_commerce_admin/core/constants.dart';
+import 'package:e_commerce_admin/models/product_model.dart';
+import 'package:e_commerce_admin/services/database_service.dart';
 import 'package:e_commerce_admin/services/storage_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class NewProductScreen extends StatelessWidget {
 
   final ProductController productController = Get.find();
   StorageService storageService = StorageService();
+  DatabaseService databaseService = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +52,14 @@ class NewProductScreen extends StatelessWidget {
                             if (image != null) {
                               await storageService.uploadImage(image);
 
-                              // var imageUrl = await storageService
-                              //     .getDownloadURL(image.name);
-                              // productController.newProduct.update(
-                              //     'imageUrl', (_) => imageUrl,
-                              //     ifAbsent: () => imageUrl);
-                              // if (kDebugMode) {
-                              //   print(productController.newProduct['imageUrl']);
-                              // }
+                              var imageUrl = await storageService
+                                  .getDownloadURL(image.name);
+                              productController.newProduct.update(
+                                  'imageUrl', (_) => imageUrl,
+                                  ifAbsent: () => imageUrl);
+                              if (kDebugMode) {
+                                print(productController.newProduct['imageUrl']);
+                              }
                             }
                           },
                           icon: const Icon(
@@ -96,14 +99,13 @@ class NewProductScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                _buildTextFormField(
-                  'Price',
-                  'price',
-                  productController,
-                  FilteringTextInputFormatter.digitsOnly,
+                _buildSlider(context, 'Price', 'price', 250, 25,
+                    productController, productController.price),
+                const SizedBox(
+                  height: 20,
                 ),
-                _buildTextFormField('Quantity', 'quantity', productController,
-                    FilteringTextInputFormatter.singleLineFormatter),
+                _buildSlider(context, 'Quantity', 'quantity', 10, 100,
+                    productController, productController.quantity),
                 _buildCheckbox(context, 'Recommended', 'isRecommended',
                     productController, productController.isRecommended),
                 _buildCheckbox(context, 'Popular', 'isPopular',
@@ -111,9 +113,20 @@ class NewProductScreen extends StatelessWidget {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      if (kDebugMode) {
-                        print(productController.newProduct);
-                      }
+                      databaseService.addProduct(Product(
+                        id: int.parse(productController.newProduct['id']),
+                        name: productController.newProduct['name'],
+                        category: productController.newProduct['category'],
+                        description:
+                            productController.newProduct['description'],
+                        imageUrl: productController.newProduct['imageUrl'],
+                        isRecommended:
+                            productController.newProduct['isRecommended'],
+                        isPopular: productController.newProduct['isPopular'],
+                        price: productController.newProduct['price'],
+                        quantity:
+                            productController.newProduct['quantity'].toInt(),
+                      ));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: kMainColor,
@@ -163,6 +176,8 @@ class NewProductScreen extends StatelessWidget {
     BuildContext context,
     String title,
     String name,
+    int divisions,
+    double max,
     ProductController productController,
     double? controllerValue,
   ) {
@@ -182,8 +197,8 @@ class NewProductScreen extends StatelessWidget {
           child: Slider(
             value: (controllerValue == null) ? 0 : controllerValue,
             min: 0,
-            max: 25,
-            divisions: 100,
+            max: max,
+            divisions: divisions,
             activeColor: kMainColor,
             inactiveColor: kMainColor,
             onChanged: (value) {
