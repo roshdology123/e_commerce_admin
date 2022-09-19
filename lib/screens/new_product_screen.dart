@@ -43,7 +43,6 @@ class NewProductScreen extends StatelessWidget {
                             ImagePicker picker = ImagePicker();
                             final XFile? image = await picker.pickImage(
                                 source: ImageSource.gallery);
-
                             if (image == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -129,7 +128,7 @@ class NewProductScreen extends StatelessWidget {
                       ));
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: kMainColor,
+                      backgroundColor: kMainColor,
                     ),
                     child: Text(
                       'Save',

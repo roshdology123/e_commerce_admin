@@ -111,17 +111,16 @@ class ProductCard extends StatelessWidget {
                               divisions: 20,
                               activeColor: kMainColor,
                               inactiveColor: kMainColor,
+                              onChangeEnd: (value) {
+                                productController.saveNewProductQuantity(
+                                    product, 'quantity', value.toInt());
+                              },
                               onChanged: (value) {
                                 productController.updateProductQuantity(
                                   index,
                                   product,
                                   value.toInt(),
                                 );
-                                onChangeEnd:
-                                (value) {
-                                  productController.saveNewProductQuantity(
-                                      product, 'quantity', value);
-                                };
                               },
                             ),
                           ),

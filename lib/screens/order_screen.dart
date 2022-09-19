@@ -1,11 +1,13 @@
+import 'package:e_commerce_admin/controllers/order_controller.dart';
 import 'package:e_commerce_admin/core/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../models/order_model.dart';
 import '../widgets/order_card.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+  OrderScreen({Key? key}) : super(key: key);
+  final OrderController orderController = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +19,13 @@ class OrderScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-                itemCount: Order.orders.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return OrderCard(order: Order.orders[index]);
-                }),
+            child: Obx(() {
+              return ListView.builder(
+                  itemCount: orderController.pendingOrders.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return OrderCard(order: orderController.orders[index]);
+                  });
+            }),
           ),
         ],
       ),

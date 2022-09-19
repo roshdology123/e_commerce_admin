@@ -1,10 +1,7 @@
 import 'package:e_commerce_admin/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/product_model.dart';
 import '../widgets/widgets.dart';
-import '/models/models.dart';
-import '/screens/screens.dart';
 import '/controllers/controllers.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -24,7 +21,7 @@ class ProductsScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            CustomAddProductCard(),
+            const CustomAddProductCard(),
             Expanded(
               child: Obx(
                 () => ListView.builder(

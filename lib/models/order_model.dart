@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class Order extends Equatable {
   final int id;
@@ -13,6 +12,7 @@ class Order extends Equatable {
   final double total;
   final bool isAccepted;
   final bool isDelivered;
+  final bool isCancelled;
   final DateTime createdAt;
 
   const Order({
@@ -24,6 +24,7 @@ class Order extends Equatable {
     required this.total,
     required this.isAccepted,
     required this.isDelivered,
+    required this.isCancelled,
     required this.createdAt,
   });
 
@@ -36,6 +37,7 @@ class Order extends Equatable {
     double? total,
     bool? isAccepted,
     bool? isDelivered,
+    bool? isCancelled,
     DateTime? createdAt,
   }) {
     return Order(
@@ -47,6 +49,7 @@ class Order extends Equatable {
       total: total ?? this.total,
       isAccepted: isAccepted ?? this.isAccepted,
       isDelivered: isDelivered ?? this.isDelivered,
+      isCancelled: isCancelled ?? this.isCancelled,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -69,13 +72,14 @@ class Order extends Equatable {
     return Order(
       id: snap['id'],
       customerId: snap['customerId'],
-      productIds: snap['productIds'],
+      productIds: snap['productIds'].cast<int>(),
       deliveryFee: snap['deliveryFee'],
       subtotal: snap['subtotal'],
       total: snap['total'],
       isAccepted: snap['isAccepted'],
       isDelivered: snap['isDelivered'],
-      createdAt: DateTime.fromMicrosecondsSinceEpoch(snap['createdAt']),
+      isCancelled: snap['isCancelled'],
+      createdAt: snap['createdAt'].toDate(),
     );
   }
 
@@ -95,6 +99,7 @@ class Order extends Equatable {
       total,
       isAccepted,
       isDelivered,
+      isCancelled,
       createdAt,
     ];
   }
@@ -109,6 +114,7 @@ class Order extends Equatable {
         total: 30,
         isAccepted: false,
         isDelivered: false,
+        isCancelled: false,
         createdAt: DateTime.now()),
     Order(
         id: 2,
@@ -119,6 +125,7 @@ class Order extends Equatable {
         total: 30,
         isAccepted: false,
         isDelivered: false,
+        isCancelled: false,
         createdAt: DateTime.now())
   ];
 }

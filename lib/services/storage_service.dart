@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 class StorageService {
@@ -7,13 +8,17 @@ class StorageService {
 
   Future<void> uploadImage(XFile image) async {
     try {
-      print(image.name);
-      print(image.path);
+      if (kDebugMode) {
+        print(image.name);
+        print(image.path);
+      }
       await storage
           .ref('product_images/${image.name}')
           .putFile(File(image.path));
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 

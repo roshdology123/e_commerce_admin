@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'core/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,16 +23,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
 
-      debugShowCheckedModeBanner: false,
-      title: 'eCommerce Admin',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        sliderTheme: SliderThemeData(
-          showValueIndicator: ShowValueIndicator.always,
-          overlayShape: SliderComponentShape.noOverlay,
-        )
-      ),
-      home: const HomeScreen(),
+        debugShowCheckedModeBanner: false,
+        title: 'eCommerce Admin',
+        theme: themeData(),
+        home: const HomeScreen(),
         getPages: [
           GetPage(name: '/products', page: () => ProductsScreen()),
           GetPage(name: '/products/new', page: () => NewProductScreen()),
