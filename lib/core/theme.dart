@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 ThemeData themeData() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: 'Poppins',
-    textTheme: textTheme(),
-  );
+      fontFamily: 'Poppins',
+      textTheme: textTheme(),
+      sliderTheme: SliderThemeData(
+        showValueIndicator: ShowValueIndicator.always,
+        overlayShape: SliderComponentShape.noOverlay,
+      ));
 }
 
 TextTheme textTheme() {
@@ -33,12 +36,13 @@ TextTheme textTheme() {
       fontSize: 16,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.bold,
-    ),      headline5: TextStyle(
-    color: Colors.black,
-    fontSize: 14,
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.bold,
-  ),
+    ),
+    headline5: TextStyle(
+      color: Colors.black,
+      fontSize: 14,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+    ),
     headline6: TextStyle(
       color: Colors.black,
       fontSize: 14,
@@ -47,15 +51,15 @@ TextTheme textTheme() {
     ),
     bodyText1: TextStyle(
       color: Colors.black,
+      fontSize: 14,
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+    ),
+    bodyText2: TextStyle(
+      color: Colors.black,
       fontSize: 12,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.normal,
     ),
-    bodyText2: TextStyle(
-    color: Colors.black,
-    fontSize: 10,
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.normal,
-  ),
   );
 }
