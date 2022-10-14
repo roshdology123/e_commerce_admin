@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'eCommerce Admin',
         theme: themeData(),
-        home: const HomeScreen(),
+        home: HomeScreen(),
         getPages: [
           GetPage(name: '/products', page: () => ProductsScreen()),
           GetPage(name: '/products/new', page: () => NewProductScreen()),

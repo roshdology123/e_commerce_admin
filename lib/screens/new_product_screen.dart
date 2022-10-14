@@ -18,6 +18,7 @@ class NewProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> categories = ['Smoothies', 'Soft Drinks', 'Water'];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -79,10 +80,11 @@ class NewProductScreen extends StatelessWidget {
                 ),
                 Text(
                   'Product Information',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headline6,
                 ),
-                _buildTextFormField('Product ID', 'id', productController,
-                    FilteringTextInputFormatter.digitsOnly),
                 _buildTextFormField('Product Name', 'name', productController,
                     FilteringTextInputFormatter.singleLineFormatter),
                 _buildTextFormField(
@@ -90,21 +92,48 @@ class NewProductScreen extends StatelessWidget {
                     'description',
                     productController,
                     FilteringTextInputFormatter.singleLineFormatter),
-                _buildTextFormField(
-                    'Product Category',
-                    'category',
-                    productController,
-                    FilteringTextInputFormatter.singleLineFormatter),
+                // _buildTextFormField(
+                //     'Product Category',
+                //     'category',
+                //     productController,
+                //     FilteringTextInputFormatter.singleLineFormatter),
+                DropdownButtonFormField(
+                    iconSize: 20,
+                    decoration:
+                    const InputDecoration(hintText: 'Product Category'),
+                    items: categories.map((category) {
+                      return DropdownMenuItem(
+                        value: category,
+                        child: Text(category),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      productController.newProduct.update(
+                          'category', (_) => value,
+                          ifAbsent: () => value);
+                    }),
                 const SizedBox(
                   height: 10,
                 ),
-                _buildSlider(context, 'Price', 'price', 250, 25,
-                    productController, productController.price),
+                _buildSlider(
+                    context,
+                    'Price',
+                    'price',
+                    250,
+                    25,
+                    productController,
+                    productController.price),
                 const SizedBox(
                   height: 20,
                 ),
-                _buildSlider(context, 'Quantity', 'quantity', 10, 100,
-                    productController, productController.quantity),
+                _buildSlider(
+                    context,
+                    'Quantity',
+                    'quantity',
+                    10,
+                    100,
+                    productController,
+                    productController.quantity),
                 _buildCheckbox(context, 'Recommended', 'isRecommended',
                     productController, productController.isRecommended),
                 _buildCheckbox(context, 'Popular', 'isPopular',
@@ -113,19 +142,22 @@ class NewProductScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       databaseService.addProduct(Product(
-                        id: int.parse(productController.newProduct['id']),
+                        id: (productController.newProduct['id']),
                         name: productController.newProduct['name'],
                         category: productController.newProduct['category'],
                         description:
-                            productController.newProduct['description'],
+                        productController.newProduct['description'],
                         imageUrl: productController.newProduct['imageUrl'],
                         isRecommended:
-                            productController.newProduct['isRecommended'],
-                        isPopular: productController.newProduct['isPopular'],
+                        productController.newProduct['isRecommended'] ??
+                            false,
+                        isPopular:
+                        productController.newProduct['isPopular'] ?? false,
                         price: productController.newProduct['price'],
                         quantity:
-                            productController.newProduct['quantity'].toInt(),
+                        productController.newProduct['quantity'].toInt(),
                       ));
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kMainColor,

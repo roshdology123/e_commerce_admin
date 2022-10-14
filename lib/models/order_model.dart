@@ -64,7 +64,8 @@ class Order extends Equatable {
       'total': total,
       'isAccepted': isAccepted,
       'isDelivered': isDelivered,
-      'createdAt': createdAt
+      'isCancelled': isCancelled,
+      'createdAt': createdAt.millisecondsSinceEpoch,
     };
   }
 
@@ -72,7 +73,7 @@ class Order extends Equatable {
     return Order(
       id: snap['id'],
       customerId: snap['customerId'],
-      productIds: snap['productIds'].cast<int>(),
+      productIds: List<int>.from(snap['productIds']),
       deliveryFee: snap['deliveryFee'],
       subtotal: snap['subtotal'],
       total: snap['total'],
@@ -89,7 +90,7 @@ class Order extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props {
+  List<Object> get props {
     return [
       id,
       customerId,
@@ -106,26 +107,28 @@ class Order extends Equatable {
 
   static List<Order> orders = [
     Order(
-        id: 1,
-        customerId: 2345,
-        productIds: const [1, 2],
-        deliveryFee: 10,
-        subtotal: 20,
-        total: 30,
-        isAccepted: false,
-        isDelivered: false,
-        isCancelled: false,
-        createdAt: DateTime.now()),
+      id: 1,
+      customerId: 2345,
+      productIds: const [1, 2],
+      deliveryFee: 10,
+      subtotal: 20,
+      total: 30,
+      isAccepted: false,
+      isDelivered: false,
+      isCancelled: false,
+      createdAt: DateTime.now(),
+    ),
     Order(
-        id: 2,
-        customerId: 23,
-        productIds: const [1, 2, 3],
-        deliveryFee: 10,
-        subtotal: 30,
-        total: 30,
-        isAccepted: false,
-        isDelivered: false,
-        isCancelled: false,
-        createdAt: DateTime.now())
+      id: 2,
+      customerId: 23,
+      productIds: const [1, 2, 3],
+      deliveryFee: 10,
+      subtotal: 30,
+      total: 30,
+      isAccepted: false,
+      isDelivered: false,
+      isCancelled: false,
+      createdAt: DateTime.now(),
+    ),
   ];
 }

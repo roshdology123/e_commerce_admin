@@ -4,6 +4,19 @@ import '../models/models.dart';
 class DatabaseService {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
+
+  Future<List<OrderStats>> getOrderStats() {
+    return _firebaseFirestore.collection('order_stats')
+        .orderBy('dateTime')
+        .get()
+        .then((querySnapshot) =>
+        querySnapshot.docs
+            .asMap()
+            .entries
+            .map((entry) => OrderStats.fromSnapshot(entry.value, entry.key))
+            .toList());
+  }
+
   Stream<List<Product>> getProducts() {
     return _firebaseFirestore
         .collection('products')
